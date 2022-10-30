@@ -4,12 +4,21 @@
  */
 package userInterface;
 
+import HospitalManagement.Patient.Patient;
+import HospitalManagement.VitalSigns.VitalSigns;
+import HospitalManagement.VitalSigns.VitalSignsHistory;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author romiltiwari
  */
 public class ViewPatientVitalSigns extends javax.swing.JPanel {
 
+    private JPanel viewOperationTask;
+    private VitalSignsHistory vitalSignsHistory;
+    private Patient patient;
     /**
      * Creates new form ViewPatientVitalSigns
      */
@@ -17,6 +26,31 @@ public class ViewPatientVitalSigns extends javax.swing.JPanel {
         initComponents();
     }
 
+    ViewPatientVitalSigns(JPanel viewOperationTask, VitalSignsHistory vitalSignsHistory
+    , Patient patient) {
+        initComponents();
+        this.viewOperationTask =viewOperationTask;
+        this.vitalSignsHistory = vitalSignsHistory;
+        this.patient = patient;
+        populateVitalTable();
+    }
+
+    public void populateVitalTable() {
+        DefaultTableModel model = (DefaultTableModel) tbVital.getModel();
+        model.setRowCount(0);
+        
+        for (VitalSigns vitalSign : patient.getVitalHistory().getVitalSignHistory()) {
+            Object[] row = new Object[4];
+            row[0] = vitalSign;
+            row[1] = vitalSign.getBp();
+            row[2] = vitalSign.getPulse();
+            row[3] = vitalSign.getDate();
+           
+       
+            
+            model.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

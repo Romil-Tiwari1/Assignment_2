@@ -6,6 +6,7 @@ package userInterface;
 
 import HospitalManagement.Appointment.Appointment;
 import HospitalManagement.Appointment.AppointmentHistory;
+import HospitalManagement.Patient.Patient;
 import HospitalManagement.Person.PersonDirectory;
 import HospitalManagement.VitalSigns.VitalSignsHistory;
 import java.awt.CardLayout;
@@ -23,6 +24,8 @@ public class PatientJPanel extends javax.swing.JPanel {
     private AppointmentHistory appointmentHistory;
     private String userName;
     private Appointment appointment;
+    private VitalSignsHistory vitalSignsHistory;
+    private Patient patient;
     
 
     /**
@@ -30,33 +33,42 @@ public class PatientJPanel extends javax.swing.JPanel {
      */
     public PatientJPanel(JPanel userProcessContainer, 
             PersonDirectory personDirectory, AppointmentHistory 
-                    appointmentHistory, Appointment appointment) {
+                    appointmentHistory, Appointment appointment, VitalSignsHistory
+                            vitalSignsHistory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.personDirectory = personDirectory;
         this.appointmentHistory = appointmentHistory;
         this.appointment = appointment;
+        this.vitalSignsHistory = vitalSignsHistory;
         loadLoginPanel();
         patientOperations.setVisible(false);
     }
 
     public PatientJPanel(JPanel userProcessContainer,
             PersonDirectory personDirectory, AppointmentHistory 
-                    appointmentHistory,String userName, Appointment appointment ) {
+                    appointmentHistory,String userName, Appointment appointment,
+    VitalSignsHistory vitalSignsHistory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userName= userName;
         this.appointmentHistory = appointmentHistory;
         this.appointment = appointment;
+        this.vitalSignsHistory = vitalSignsHistory;
     }
 
     private void loadLoginPanel() {
         LoginJPanel patientJPanel
                 = new LoginJPanel(viewOperationTask, personDirectory,
-                appointmentHistory, appointment);
+                appointmentHistory, appointment, vitalSignsHistory);
         viewOperationTask.add("patientJPanel", patientJPanel);
         CardLayout layout = (CardLayout) viewOperationTask.getLayout();
         layout.next(viewOperationTask);
+    }
+    
+     public Patient getPatient()
+    {
+        return this.patient;
     }
 
     /**
@@ -188,8 +200,9 @@ public class PatientJPanel extends javax.swing.JPanel {
     private void vitalsHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vitalsHistoryActionPerformed
         // TODO add your handling code here:
         ViewPatientVitalSigns vitalsRecord
-                = new ViewPatientVitalSigns(viewOperationTask, vital);
-        viewOperationTask.add("bookAppointment", bookAppointment);
+                = new ViewPatientVitalSigns(viewOperationTask, vitalSignsHistory,
+                patient);
+        viewOperationTask.add("vitalsRecord", vitalsRecord);
         CardLayout layout = (CardLayout) viewOperationTask.getLayout();
         layout.next(viewOperationTask);
     }//GEN-LAST:event_vitalsHistoryActionPerformed

@@ -7,7 +7,9 @@ package userInterface;
 import HospitalManagement.Appointment.Appointment;
 import HospitalManagement.Appointment.AppointmentHistory;
 import HospitalManagement.Person.PersonDirectory;
+import HospitalManagement.VitalSigns.VitalSignsHistory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -18,21 +20,24 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     String userName;
+    String userPassword;
     private PersonDirectory personDirectory;
     private AppointmentHistory appointmentHistory;
     private Appointment appointment;
+    private VitalSignsHistory vitalSigns;
 
     /**
      * Creates new form LoginJPanel
      */
-    public LoginJPanel(JPanel userProcessContainer, 
-            PersonDirectory personDirectory, AppointmentHistory 
-                    appointmentHistory,Appointment appointment) {
+    public LoginJPanel(JPanel userProcessContainer,
+            PersonDirectory personDirectory, AppointmentHistory appointmentHistory, Appointment appointment,
+            VitalSignsHistory vitalSigns) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.personDirectory = personDirectory;
         this.appointmentHistory = appointmentHistory;
         this.appointment = appointment;
+        this.vitalSigns = vitalSigns;
     }
 
     /**
@@ -131,13 +136,31 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         userName = userNameJInput.getText();
-        loginPanel.removeAll();
-        PatientJPanel patientJPanel
-                = new PatientJPanel(userProcessContainer,personDirectory,
-                        appointmentHistory, userName, appointment);
-        userProcessContainer.add("patientJPanel", patientJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        userPassword = new String (userPasswordJInput.getPassword());;
+        System.out.println(userPassword);
+
+        if (userName.toLowerCase().equals("patient") && 
+                userPassword.toLowerCase().equals("patient")) {
+            JOptionPane.showMessageDialog(this,
+                    "Login success", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+            userNameJInput.setText("");
+            userPasswordJInput.setText("");
+            PatientJPanel patientJPanel
+                    = new PatientJPanel(userProcessContainer, personDirectory,
+                            appointmentHistory, userName, appointment, 
+                            vitalSigns);
+            userProcessContainer.add("patientJPanel", patientJPanel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Invalid Credentials", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            userNameJInput.setText("");
+            userPasswordJInput.setText("");
+        }
+        
     }//GEN-LAST:event_loginButtonActionPerformed
 
 

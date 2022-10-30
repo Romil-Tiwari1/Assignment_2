@@ -169,13 +169,12 @@ public class CreateVItalSignsJPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        String searchText = tctPatientId.getText();
+        int searchText = Integer.parseInt(tctPatientId.getText());
         Patient searchedPatient = null;
-        boolean found = false;
+ 
         for (Patient patient : patientDirectory.getPatientDirectory()) {
-            if (patient.getEmailId().equalsIgnoreCase(searchText)) {
+            if (patient.getId() == searchText) {
                 searchedPatient = patient;
-                found = true;
                 break;
             }
         }

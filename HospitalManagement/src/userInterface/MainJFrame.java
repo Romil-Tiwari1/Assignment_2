@@ -167,7 +167,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         PatientJPanel patientJPanel
                 = new PatientJPanel(userProcessContainer, personDirectory,
-                        appointmentHistory, appointment);
+                        appointmentHistory, appointment, vitalSignsHistory);
         userProcessContainer.add("patientJPanel", patientJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

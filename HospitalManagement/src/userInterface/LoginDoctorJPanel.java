@@ -10,6 +10,7 @@ import HospitalManagement.Patient.PatientDirectory;
 import HospitalManagement.Person.PersonDirectory;
 import HospitalManagement.VitalSigns.VitalSignsHistory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -20,6 +21,7 @@ public class LoginDoctorJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     String userName;
+    String userPassword;
     private PersonDirectory personDirectory;
     private AppointmentHistory appointmentHistory;
     private VitalSignsHistory vitalSignsHistory;
@@ -30,7 +32,7 @@ public class LoginDoctorJPanel extends javax.swing.JPanel {
      * Creates new form LoginDoctorJPanel
      */
     public LoginDoctorJPanel(JPanel userProcessContainer,
-            PersonDirectory personDirectory, VitalSignsHistory vitalSignsHistory, 
+            PersonDirectory personDirectory, VitalSignsHistory vitalSignsHistory,
             PatientDirectory patientDirectory,
             Patient patient) {
         initComponents();
@@ -137,13 +139,26 @@ public class LoginDoctorJPanel extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         userName = userNameJInput.getText();
-        loginPanel.removeAll();
-        DoctorJPanel doctorJPanel
-                = new DoctorJPanel(userProcessContainer, personDirectory,
-                        vitalSignsHistory, userName, patient, patientDirectory);
-        userProcessContainer.add("patientJPanel", doctorJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        userPassword = new String (userPasswordJInput.getPassword());
+
+        if (userName.toLowerCase().equals("doctor") && userPassword.equals("doctor")) {
+            loginPanel.removeAll();
+            JOptionPane.showMessageDialog(this,
+                    "Login success", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+            DoctorJPanel doctorJPanel
+                    = new DoctorJPanel(userProcessContainer, personDirectory,
+                            vitalSignsHistory, userName, patient, patientDirectory);
+            userProcessContainer.add("patientJPanel", doctorJPanel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Invalid Credentials", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            userNameJInput.setText("");
+            userPasswordJInput.setText("");
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
 
