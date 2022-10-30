@@ -39,7 +39,7 @@ public class PersonDirectory {
         return person;
     }
 
-    public void deletePerson(Person person) {
+    public void deletePerson(Person person ) {
         personDirectory.remove(person);
     }
 
@@ -60,46 +60,7 @@ public class PersonDirectory {
         this.patientDirectory = patientList;
     }
     
-//    public ArrayList<Person> searchPatient(String key)
-//    {
-//        ArrayList<Person> searchPatientDirectory = new ArrayList();
-//        for(Person person: personDirectory)
-//        {
-//            if(person.getPersonName().toLowerCase().startsWith(key.toLowerCase()))
-//            {
-//                if(person.getPatient()!=null)
-//                {
-//                    searchPatientDirectory.add(person);
-//                }
-//            }
-//        }
-//        return searchPatientDirectory;
-//    }
-    
-    /*
-    public ArrayList<Person> searchPerson(String key)
-    {
-        ArrayList<Person> searchPersonDirectory = new ArrayList();
-        for(Person person: personDirectory)
-        {
-            if(person.getPersonName().toLowerCase().startsWith(key.toLowerCase()))
-            {
-                searchPersonDirectory.add(person);
-            }
-        }
-        return searchPersonDirectory;
-    }
-     */
-//    public ArrayList<Person> searchPerson(String key) {
-//        ArrayList<Person> searchPersonDirectory = new ArrayList();
-//        for (Person person : personDirectory) {
-//            if (person.getUserName().toLowerCase().startsWith(key.toLowerCase())) {
-//                searchPersonDirectory.add(person);
-//            }
-//        }
-//        return searchPersonDirectory;
-//    }
-
+   
     public boolean authenticatePerson(String userKey, String passKey) {
         ArrayList<Person> searchPersonDirectory = new ArrayList();
         for (Person person : personDirectory) {
@@ -114,5 +75,9 @@ public class PersonDirectory {
             }
         }
         return flag;
+    }
+
+    public void deleteEmployeeHistory(Person person) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

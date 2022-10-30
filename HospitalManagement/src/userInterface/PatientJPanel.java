@@ -84,6 +84,11 @@ public class PatientJPanel extends javax.swing.JPanel {
         });
 
         vitalsHistory.setText("Vital History");
+        vitalsHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vitalsHistoryActionPerformed(evt);
+            }
+        });
 
         bookAppointment.setText("Book Appointment");
         bookAppointment.addActionListener(new java.awt.event.ActionListener() {
@@ -179,6 +184,15 @@ public class PatientJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) viewOperationTask.getLayout();
         layout.next(viewOperationTask);
     }//GEN-LAST:event_bookAppointmentActionPerformed
+
+    private void vitalsHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vitalsHistoryActionPerformed
+        // TODO add your handling code here:
+        ViewPatientVitalSigns vitalsRecord
+                = new ViewPatientVitalSigns(viewOperationTask, vital);
+        viewOperationTask.add("bookAppointment", bookAppointment);
+        CardLayout layout = (CardLayout) viewOperationTask.getLayout();
+        layout.next(viewOperationTask);
+    }//GEN-LAST:event_vitalsHistoryActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

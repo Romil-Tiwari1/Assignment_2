@@ -131,6 +131,15 @@ public class DoctorJPanel extends javax.swing.JPanel {
 
     private void recordObservationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordObservationButtonActionPerformed
         // TODO add your handling code here:
+        //CreateVItalSignsJPanel vitalSignCreate=new CreateVItalSignsJPanel(patientDirectory);
+        //splitPane.setRightComponent(vitalSignCreate);
+        
+        CreateVItalSignsJPanel vitalSignCreate
+                = new CreateVItalSignsJPanel(viewOperationsTask,
+                        patientDirectory);
+        viewOperationsTask.add("bookAppointment", vitalSignCreate);
+        CardLayout layout = (CardLayout) viewOperationsTask.getLayout();
+        layout.next(viewOperationsTask);
     }//GEN-LAST:event_recordObservationButtonActionPerformed
 
     private void patientDetailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDetailsButtonActionPerformed
