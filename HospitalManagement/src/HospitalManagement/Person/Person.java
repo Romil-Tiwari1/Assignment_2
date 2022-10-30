@@ -20,20 +20,6 @@ public class Person {
     public String userPassword;
     public String userType;
 
-//    public Person(int id, String personName, int age, String gender,
-//            String contactNumber, String emailId, String userName,
-//            String userPassword, String userType) {
-//        this.id = id;
-//        this.personName = personName;
-//        this.age = age;
-//        this.gender = gender;
-//        this.contactNumber = contactNumber;
-//        this.emailId = emailId;
-//        this.userName = userName;
-//        this.userPassword = userPassword;
-//        this.userType = userType;
-//    }
-
     public Person(int id, String name, int age,String gender,
             String phoneNumber,String email, String userType,
             String userName, String userPass)

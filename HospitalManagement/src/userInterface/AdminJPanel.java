@@ -5,9 +5,12 @@
 package userInterface;
 
 import HospitalManagement.Patient.PatientDirectory;
+import HospitalManagement.Person.Person;
 import HospitalManagement.Person.PersonDirectory;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,42 +21,49 @@ public class AdminJPanel extends javax.swing.JPanel {
     private PersonDirectory personDirectory;
     private JPanel userProcessContainer;
     private PatientDirectory patientDirectory;
-            
-    /**
-     * Creates new form AdminJPanel
-     */
-    public AdminJPanel() {
-        initComponents();
-        
-    }
+    private ArrayList<Person> personList;
+    String adminType;
+
+    
 
     public AdminJPanel(JPanel userProcessContainer,
-            PersonDirectory personDirectory, 
+            PersonDirectory personDirectory,
             PatientDirectory patientDirectory, int count) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.patientDirectory = patientDirectory;
         this.personDirectory = personDirectory;
         loadLoginPanel();
+        jPanel1.setVisible(false);
     }
 
-    public AdminJPanel(JPanel userProcessContainer, 
-            PersonDirectory personDirectory, PatientDirectory patientDirectory) 
-    {
+    public AdminJPanel(JPanel userProcessContainer,
+            PersonDirectory personDirectory, PatientDirectory patientDirectory ,
+            String adminType) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.patientDirectory = patientDirectory;
         this.personDirectory = personDirectory;
-        
+        this.adminType = adminType;
+        if (adminType.equals("System")) {
+            jPanel1.setVisible(true);
+            jButton1.setVisible(true);
+            jButton2.setVisible(false);
+        } else {
+            jPanel1.setVisible(true);
+            jButton1.setVisible(false);
+            jButton2.setVisible(true);
+        }
     }
-    
+
+
     private void loadLoginPanel() {
         LoginAdminJPanel adminLoginJPanel
-                = new LoginAdminJPanel(jPanel1, personDirectory,
-                patientDirectory);
-        jPanel1.add("adminLoginJPanel", adminLoginJPanel);
-        CardLayout layout = (CardLayout) jPanel1.getLayout();
-        layout.next(jPanel1);
+                = new LoginAdminJPanel(adminTask, personDirectory,
+                        patientDirectory);
+        adminTask.add("adminLoginJPanel", adminLoginJPanel);
+        CardLayout layout = (CardLayout) adminTask.getLayout();
+        layout.next(adminTask);
     }
 
     /**
@@ -65,41 +75,77 @@ public class AdminJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        adminHeading = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        adminTask = new javax.swing.JPanel();
 
-        jPanel1.setLayout(new java.awt.CardLayout());
+        jButton1.setText("System Admin");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        adminHeading.setText("ADMIN PANEL");
+        jButton2.setText("Community Admin");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(248, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(27, 27, 27)
+                .addComponent(jButton2)
+                .addContainerGap(291, Short.MAX_VALUE))
+        );
+
+        jSplitPane1.setLeftComponent(jPanel1);
+
+        adminTask.setLayout(new java.awt.CardLayout());
+        jSplitPane1.setRightComponent(adminTask);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 205, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(adminHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(381, 381, 381))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(165, 165, 165))))
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(adminHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        SystemAdminJPanelForm systemAdmin = 
+                new SystemAdminJPanelForm (adminTask, personDirectory,
+                        patientDirectory);
+        adminTask.add("adminLoginJPanel", systemAdmin);
+        CardLayout layout = (CardLayout) adminTask.getLayout();
+        layout.next(adminTask);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel adminHeading;
+    private javax.swing.JPanel adminTask;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSplitPane jSplitPane1;
     // End of variables declaration//GEN-END:variables
 }

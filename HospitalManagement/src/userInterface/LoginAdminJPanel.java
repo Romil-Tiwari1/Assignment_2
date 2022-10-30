@@ -17,9 +17,10 @@ import javax.swing.JPanel;
 public class LoginAdminJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    String userName;
+    String admin;
     private PersonDirectory personDirectory;
     private PatientDirectory patientDirectory;
+
     /**
      * Creates new form LoginAdminJPanel
      */
@@ -27,9 +28,10 @@ public class LoginAdminJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public LoginAdminJPanel(JPanel jPanel1, 
+    public LoginAdminJPanel(JPanel jPanel1,
             PersonDirectory personDirectory, PatientDirectory patientDirectory) {
         initComponents();
+        this.userProcessContainer = jPanel1;
         this.patientDirectory = patientDirectory;
         this.personDirectory = personDirectory;
     }
@@ -43,21 +45,24 @@ public class LoginAdminJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        adminPanelForm = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         adminUserNameTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         adminUserPasswordTextField = new javax.swing.JTextField();
-        resetButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
 
-        jLabel1.setText("Admin Username");
+        jLabel3.setText("ADMIN LOGIN PANEL");
 
         adminUserNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adminUserNameTextFieldActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Admin Username");
 
         jLabel2.setText("Admin Password");
 
@@ -67,10 +72,6 @@ public class LoginAdminJPanel extends javax.swing.JPanel {
             }
         });
 
-        resetButton.setText("Reset");
-
-        jLabel3.setText("ADMIN LOGIN PANEL");
-
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,48 +79,69 @@ public class LoginAdminJPanel extends javax.swing.JPanel {
             }
         });
 
+        resetButton.setText("Reset");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout adminPanelFormLayout = new javax.swing.GroupLayout(adminPanelForm);
+        adminPanelForm.setLayout(adminPanelFormLayout);
+        adminPanelFormLayout.setHorizontalGroup(
+            adminPanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminPanelFormLayout.createSequentialGroup()
+                .addGroup(adminPanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(adminPanelFormLayout.createSequentialGroup()
+                        .addGap(353, 353, 353)
+                        .addComponent(jLabel3))
+                    .addGroup(adminPanelFormLayout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addGroup(adminPanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(adminPanelFormLayout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(125, 125, 125)
+                                .addComponent(adminUserNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(adminPanelFormLayout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(adminPanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(adminPanelFormLayout.createSequentialGroup()
+                                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(adminUserPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(190, Short.MAX_VALUE))
+        );
+        adminPanelFormLayout.setVerticalGroup(
+            adminPanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminPanelFormLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(adminPanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(adminUserNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addGroup(adminPanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(adminUserPasswordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addGroup(adminPanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(147, 147, 147))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(383, 383, 383))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(183, 183, 183)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(adminUserNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(adminUserPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(219, Short.MAX_VALUE))
+            .addComponent(adminPanelForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(adminUserNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                    .addComponent(adminUserPasswordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(194, 194, 194))
+            .addComponent(adminPanelForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,36 +155,54 @@ public class LoginAdminJPanel extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        
-        if(adminUserNameTextField.getText().toLowerCase()
+
+        if (adminUserNameTextField.getText().toLowerCase()
                 .equals("SystemAdmin0710") || adminUserPasswordTextField
-                .getText().toLowerCase().equals("system"))
-        {
-            JOptionPane.showMessageDialog(this, 
-                    "Admin Login Success", "Success" ,
-                    JOptionPane.INFORMATION_MESSAGE);  
-            AdminJPanel systemAdmin =
-                    new AdminJPanel(userProcessContainer,
-                            personDirectory,patientDirectory );
-        userProcessContainer.add("systemAdmin", systemAdmin);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+                .getText().toLowerCase().equals("system")) {
+            JOptionPane.showMessageDialog(this,
+                    "Admin Login Success", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+            adminPanelForm.removeAll();
+            admin = "System";
+            AdminJPanel systemAdmin
+                    = new AdminJPanel(userProcessContainer,
+                            personDirectory, patientDirectory, admin);
+            userProcessContainer.add("systemAdmin", systemAdmin);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
         } else if (adminUserNameTextField.getText().toLowerCase()
                 .equals("CommunityAdmin0710") || adminUserPasswordTextField
                 .getText().toLowerCase().equals("community")) {
-            JOptionPane.showMessageDialog(this, 
-                    "Admin Login Success", "Success" ,
-                    JOptionPane.INFORMATION_MESSAGE); 
-            
+            JOptionPane.showMessageDialog(this,
+                    "Admin Login Success", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+            adminPanelForm.removeAll();
+            admin = "Community";
+            AdminJPanel systemAdmin
+                    = new AdminJPanel(userProcessContainer,
+                            personDirectory, patientDirectory, admin);
+            userProcessContainer.add("systemAdmin", systemAdmin);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+
         } else {
-            JOptionPane.showMessageDialog(this, 
-                    "Invalid Credentials", "Error" ,
-                    JOptionPane.ERROR_MESSAGE);  
+            JOptionPane.showMessageDialog(this,
+                    "Invalid Credentials", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            adminUserNameTextField.setText("");
+            adminUserPasswordTextField.setText("");
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        // TODO add your handling code here:
+        adminUserNameTextField.setText("");
+        adminUserPasswordTextField.setText("");
+    }//GEN-LAST:event_resetButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel adminPanelForm;
     private javax.swing.JTextField adminUserNameTextField;
     private javax.swing.JTextField adminUserPasswordTextField;
     private javax.swing.JLabel jLabel1;
