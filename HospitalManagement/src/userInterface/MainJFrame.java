@@ -6,10 +6,10 @@ package userInterface;
 
 import HospitalManagement.Appointment.Appointment;
 import HospitalManagement.Appointment.AppointmentHistory;
+import HospitalManagement.Community.CommunityDirectory;
 import HospitalManagement.Patient.Patient;
 import HospitalManagement.Patient.PatientDirectory;
 import HospitalManagement.Person.PersonDirectory;
-import HospitalManagement.VitalSigns.VitalSignsHistory;
 import java.awt.CardLayout;
 
 /**
@@ -21,11 +21,11 @@ public class MainJFrame extends javax.swing.JFrame {
     private PersonDirectory personDirectory;
     private CreatePersonJPanel createPersonJpanel;
     private AppointmentHistory appointmentHistory;
-    private VitalSignsHistory vitalSignsHistory;
     private Appointment appointment;
     private PatientDirectory patientDirectory;
     private Patient patient;
     private int count;
+    private CommunityDirectory communityDirectory;
 
     /**
      * Creates new form MainJFrame
@@ -35,10 +35,10 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         personDirectory = new PersonDirectory();
         appointmentHistory = new AppointmentHistory();
-        vitalSignsHistory = new VitalSignsHistory();
         patientDirectory = new PatientDirectory();
         patient = new Patient();
         appointment = new Appointment();
+        communityDirectory = new CommunityDirectory();
         count = 0;
     }
 
@@ -145,7 +145,7 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         AdminJPanel adminJPanel =
                 new AdminJPanel(userProcessContainer,personDirectory,
-                patientDirectory, count);
+                patientDirectory, count, communityDirectory);
         userProcessContainer.add("adminJPanel", adminJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -167,7 +167,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
         PatientJPanel patientJPanel
                 = new PatientJPanel(userProcessContainer, personDirectory,
-                        appointmentHistory, appointment, vitalSignsHistory);
+                        appointmentHistory, appointment, 
+                patientDirectory,patient);
         userProcessContainer.add("patientJPanel", patientJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -177,7 +178,8 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DoctorJPanel doctorJPanel
                 = new DoctorJPanel(userProcessContainer, personDirectory,
-                        appointmentHistory, vitalSignsHistory, patient, patientDirectory
+                        appointmentHistory, 
+                        patient, patientDirectory
                          );
         userProcessContainer.add("doctorJPanel", doctorJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();

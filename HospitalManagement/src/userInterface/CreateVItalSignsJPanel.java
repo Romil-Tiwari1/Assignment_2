@@ -7,6 +7,7 @@ package userInterface;
 import HospitalManagement.Patient.Patient;
 import HospitalManagement.Patient.PatientDirectory;
 import HospitalManagement.VitalSigns.VitalSigns;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -18,21 +19,25 @@ public class CreateVItalSignsJPanel extends javax.swing.JPanel {
     private VitalSigns vitalSigns;
     private PatientDirectory patientDirectory;
     private JPanel viewOperationsTask;
+    private Patient patient;
 
     /**
      * Creates new form CreateVItalSignsJPanel
      */
-    public CreateVItalSignsJPanel(PatientDirectory patientDirectory) {
+    public CreateVItalSignsJPanel(PatientDirectory patientDirectory, Patient patient) {
         initComponents();
         this.patientDirectory = patientDirectory;
         this.vitalSigns = new VitalSigns();
+        this.patient = patient;
     }
 
-    public CreateVItalSignsJPanel(JPanel viewOperationsTask, PatientDirectory patientDirectory) {
+    public CreateVItalSignsJPanel(JPanel viewOperationsTask, 
+            PatientDirectory patientDirectory, Patient patient) {
         initComponents();
         this.viewOperationsTask = viewOperationsTask;
         this.patientDirectory = patientDirectory;
         this.vitalSigns = new VitalSigns();
+        this.patient = patient;
     }
 
     /**
@@ -137,12 +142,12 @@ public class CreateVItalSignsJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lblTemparature)
-                        .addGap(12, 12, 12))
+                        .addGap(197, 197, 197))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(txtTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addComponent(btnSave)
-                .addGap(162, 162, 162))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSave)
+                        .addGap(162, 162, 162))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -169,14 +174,19 @@ public class CreateVItalSignsJPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+         
         int searchText = Integer.parseInt(tctPatientId.getText());
         Patient searchedPatient = null;
- 
+        boolean found = false;
+        System.out.println(patientDirectory.getPatientDirectory());
         for (Patient patient : patientDirectory.getPatientDirectory()) {
             if (patient.getId() == searchText) {
+                found = true;
                 searchedPatient = patient;
+                System.out.println(searchedPatient);
                 break;
             }
+
         }
         String bloodpressure = txtBloodPressure.getText();
         String Date = txtDate.getText();
@@ -186,8 +196,18 @@ public class CreateVItalSignsJPanel extends javax.swing.JPanel {
         vitalSigns.setDate(Date);
         vitalSigns.setPulse(Integer.parseInt(pulse));
         vitalSigns.setTemp(Double.parseDouble(temp));
+        //searchedPatient.getVitalHistory().addVitalSign(vitalSigns);
+        System.out.println("Create Vital sign");
+        System.out.println(searchedPatient.getVitalHistory());
+        
+        
+       
         searchedPatient.getVitalHistory().addVitalSign(vitalSigns);
-
+        searchedPatient.setVitalHistory(searchedPatient.getVitalHistory());
+        JOptionPane.showMessageDialog(this,
+                    "Vital Signs Added", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+        clearFields();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTempActionPerformed
@@ -210,4 +230,15 @@ public class CreateVItalSignsJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtPulse;
     private javax.swing.JTextField txtTemp;
     // End of variables declaration//GEN-END:variables
+
+    
+    private void clearFields() {
+        txtBloodPressure.setText("");
+        txtDate.setText("");
+        txtPulse.setText("");
+        txtTemp.setText("");
+        tctPatientId.setText("");
+    }
 }
+
+

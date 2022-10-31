@@ -19,6 +19,13 @@ public class VitalSigns {
     String date;
     String patientId;
 
+    public VitalSigns(double temp, int pulse, String date, String patientId) {
+        this.temp = temp;
+        this.pulse = pulse;
+        this.date = date;
+        this.patientId = patientId;
+    }
+
     public VitalSigns() {
         //TODO
     }
@@ -62,4 +69,11 @@ public class VitalSigns {
     public void setPatientId(String patientId) {
         this.patientId = patientId;
     }
+
+    @Override
+    public String toString() {
+        return date;
+    }
+ 
+    
 }

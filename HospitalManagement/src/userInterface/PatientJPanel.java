@@ -7,6 +7,7 @@ package userInterface;
 import HospitalManagement.Appointment.Appointment;
 import HospitalManagement.Appointment.AppointmentHistory;
 import HospitalManagement.Patient.Patient;
+import HospitalManagement.Patient.PatientDirectory;
 import HospitalManagement.Person.PersonDirectory;
 import HospitalManagement.VitalSigns.VitalSignsHistory;
 import java.awt.CardLayout;
@@ -24,51 +25,60 @@ public class PatientJPanel extends javax.swing.JPanel {
     private AppointmentHistory appointmentHistory;
     private String userName;
     private Appointment appointment;
-    private VitalSignsHistory vitalSignsHistory;
     private Patient patient;
-    
+    private PatientDirectory patientDirectory;
 
     /**
      * Creates new form PatientJPanel
      */
-    public PatientJPanel(JPanel userProcessContainer, 
-            PersonDirectory personDirectory, AppointmentHistory 
-                    appointmentHistory, Appointment appointment, VitalSignsHistory
-                            vitalSignsHistory) {
+    public PatientJPanel(JPanel userProcessContainer,
+            PersonDirectory personDirectory, AppointmentHistory appointmentHistory, Appointment appointment,
+   
+            PatientDirectory patientDirectory, Patient patient) {
+        this.patient = patient;
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.personDirectory = personDirectory;
         this.appointmentHistory = appointmentHistory;
         this.appointment = appointment;
-        this.vitalSignsHistory = vitalSignsHistory;
         loadLoginPanel();
         patientOperations.setVisible(false);
-    }
-
-    public PatientJPanel(JPanel userProcessContainer,
-            PersonDirectory personDirectory, AppointmentHistory 
-                    appointmentHistory,String userName, Appointment appointment,
-    VitalSignsHistory vitalSignsHistory) {
-        initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.userName= userName;
-        this.appointmentHistory = appointmentHistory;
-        this.appointment = appointment;
-        this.vitalSignsHistory = vitalSignsHistory;
     }
 
     private void loadLoginPanel() {
         LoginJPanel patientJPanel
                 = new LoginJPanel(viewOperationTask, personDirectory,
-                appointmentHistory, appointment, vitalSignsHistory);
+                        appointmentHistory, appointment,
+                        patientDirectory, patient);
         viewOperationTask.add("patientJPanel", patientJPanel);
         CardLayout layout = (CardLayout) viewOperationTask.getLayout();
         layout.next(viewOperationTask);
     }
-    
-     public Patient getPatient()
-    {
+
+    public Patient getPatient() {
         return this.patient;
+    }
+
+    public void setDefault(PatientDirectory patientDirectory) {
+        this.patientDirectory = patientDirectory;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public PatientJPanel(JPanel userProcessContainer,
+            PersonDirectory personDirectory, AppointmentHistory appointmentHistory, String userName, Appointment appointment,
+            PatientDirectory patientDirectory,
+            Patient patient) {
+        this.patient = patient;
+        initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.userName = userName;
+        this.appointmentHistory = appointmentHistory;
+        this.appointment = appointment;
+        this.patientDirectory = patientDirectory;
+
     }
 
     /**
@@ -200,8 +210,8 @@ public class PatientJPanel extends javax.swing.JPanel {
     private void vitalsHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vitalsHistoryActionPerformed
         // TODO add your handling code here:
         ViewPatientVitalSigns vitalsRecord
-                = new ViewPatientVitalSigns(viewOperationTask, vitalSignsHistory,
-                patient);
+                = new ViewPatientVitalSigns(viewOperationTask,
+                        this.patient, patientDirectory);
         viewOperationTask.add("vitalsRecord", vitalsRecord);
         CardLayout layout = (CardLayout) viewOperationTask.getLayout();
         layout.next(viewOperationTask);

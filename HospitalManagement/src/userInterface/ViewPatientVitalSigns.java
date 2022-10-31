@@ -5,8 +5,10 @@
 package userInterface;
 
 import HospitalManagement.Patient.Patient;
+import HospitalManagement.Patient.PatientDirectory;
 import HospitalManagement.VitalSigns.VitalSigns;
 import HospitalManagement.VitalSigns.VitalSignsHistory;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,40 +19,18 @@ import javax.swing.table.DefaultTableModel;
 public class ViewPatientVitalSigns extends javax.swing.JPanel {
 
     private JPanel viewOperationTask;
-    private VitalSignsHistory vitalSignsHistory;
     private Patient patient;
-    /**
-     * Creates new form ViewPatientVitalSigns
-     */
-    public ViewPatientVitalSigns() {
-        initComponents();
-    }
+    private PatientDirectory patientDirectory;
 
-    ViewPatientVitalSigns(JPanel viewOperationTask, VitalSignsHistory vitalSignsHistory
-    , Patient patient) {
-        initComponents();
-        this.viewOperationTask =viewOperationTask;
-        this.vitalSignsHistory = vitalSignsHistory;
+    public ViewPatientVitalSigns(JPanel viewOperationTask,
+            Patient patient, PatientDirectory patientDirectory) {
         this.patient = patient;
+        initComponents();
+        this.viewOperationTask = viewOperationTask;
+        this.patientDirectory = patientDirectory;
         populateVitalTable();
     }
 
-    public void populateVitalTable() {
-        DefaultTableModel model = (DefaultTableModel) tbVital.getModel();
-        model.setRowCount(0);
-        
-        for (VitalSigns vitalSign : patient.getVitalHistory().getVitalSignHistory()) {
-            Object[] row = new Object[4];
-            row[0] = vitalSign;
-            row[1] = vitalSign.getBp();
-            row[2] = vitalSign.getPulse();
-            row[3] = vitalSign.getDate();
-           
-       
-            
-            model.addRow(row);
-        }
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -130,4 +110,40 @@ public class ViewPatientVitalSigns extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbVital;
     // End of variables declaration//GEN-END:variables
+
+    public void populateVitalTable() {
+
+        DefaultTableModel model = (DefaultTableModel) tbVital.getModel();
+        model.setRowCount(0);
+        
+        if (patient.getVitalHistory() == null) {
+
+            ArrayList<VitalSigns> vitalDummyList = new ArrayList<>();
+            VitalSigns v1 = new VitalSigns(30, 30, "12", "12");
+
+            vitalDummyList.add(v1);
+
+            for (VitalSigns vitalSign : vitalDummyList) {
+                Object[] row = new Object[4];
+                row[0] = vitalSign;
+                row[1] = vitalSign.getBp();
+                row[2] = vitalSign.getPulse();
+                row[3] = vitalSign.getTemp();
+
+                model.addRow(row);
+            }
+        } else {
+            for (VitalSigns vitalSign : patient.getVitalHistory().getVitalSignHistory()) {
+                Object[] row = new Object[4];
+                row[0] = vitalSign;
+                row[1] = vitalSign.getBp();
+                row[2] = vitalSign.getPulse();
+                row[3] = vitalSign.getTemp();
+
+                model.addRow(row);
+            }
+        }
+
+    }
+
 }

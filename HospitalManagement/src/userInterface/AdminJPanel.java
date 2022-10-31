@@ -4,6 +4,7 @@
  */
 package userInterface;
 
+import HospitalManagement.Community.CommunityDirectory;
 import HospitalManagement.Patient.PatientDirectory;
 import HospitalManagement.Person.Person;
 import HospitalManagement.Person.PersonDirectory;
@@ -22,29 +23,33 @@ public class AdminJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private PatientDirectory patientDirectory;
     private ArrayList<Person> personList;
+    private CommunityDirectory communityDirectory;
     String adminType;
 
     
 
     public AdminJPanel(JPanel userProcessContainer,
             PersonDirectory personDirectory,
-            PatientDirectory patientDirectory, int count) {
+            PatientDirectory patientDirectory, int count, CommunityDirectory
+                    communityDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.patientDirectory = patientDirectory;
         this.personDirectory = personDirectory;
+        this.communityDirectory = communityDirectory;
         loadLoginPanel();
         jPanel1.setVisible(false);
     }
 
     public AdminJPanel(JPanel userProcessContainer,
             PersonDirectory personDirectory, PatientDirectory patientDirectory ,
-            String adminType) {
+            String adminType, CommunityDirectory communityDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.patientDirectory = patientDirectory;
         this.personDirectory = personDirectory;
         this.adminType = adminType;
+        this.communityDirectory = communityDirectory;
         if (adminType.equals("System")) {
             jPanel1.setVisible(true);
             jButton1.setVisible(true);
@@ -60,7 +65,7 @@ public class AdminJPanel extends javax.swing.JPanel {
     private void loadLoginPanel() {
         LoginAdminJPanel adminLoginJPanel
                 = new LoginAdminJPanel(adminTask, personDirectory,
-                        patientDirectory);
+                        patientDirectory, communityDirectory);
         adminTask.add("adminLoginJPanel", adminLoginJPanel);
         CardLayout layout = (CardLayout) adminTask.getLayout();
         layout.next(adminTask);
@@ -89,6 +94,11 @@ public class AdminJPanel extends javax.swing.JPanel {
         });
 
         jButton2.setText("Community Admin");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,7 +148,18 @@ public class AdminJPanel extends javax.swing.JPanel {
         adminTask.add("adminLoginJPanel", systemAdmin);
         CardLayout layout = (CardLayout) adminTask.getLayout();
         layout.next(adminTask);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        CommunityAdminJPanelForm communityAdmin = 
+                new CommunityAdminJPanelForm (adminTask, personDirectory,
+                        patientDirectory, communityDirectory);
+        adminTask.add("communityAdmin", communityAdmin);
+        CardLayout layout = (CardLayout) adminTask.getLayout();
+        layout.next(adminTask);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

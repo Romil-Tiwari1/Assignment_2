@@ -4,10 +4,24 @@
  */
 package HospitalManagement.Community;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author romiltiwari
  */
 public class CommunityDirectory {
-    
+    ArrayList<Community> communityDirectory;
+    public CommunityDirectory()
+    {
+        communityDirectory =new ArrayList<>();
+    }
+
+    public ArrayList<Community> getHospitalDirectory() {
+        return communityDirectory;
+    }
+
+    public void setHospitalDirectory(ArrayList<Community> hospitalDirectory) {
+        this.communityDirectory = hospitalDirectory;
+    }
 }

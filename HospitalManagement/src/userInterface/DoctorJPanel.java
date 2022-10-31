@@ -8,7 +8,6 @@ import HospitalManagement.Appointment.AppointmentHistory;
 import HospitalManagement.Patient.Patient;
 import HospitalManagement.Patient.PatientDirectory;
 import HospitalManagement.Person.PersonDirectory;
-import HospitalManagement.VitalSigns.VitalSignsHistory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -20,32 +19,20 @@ public class DoctorJPanel extends javax.swing.JPanel {
 
     private PersonDirectory personDirectory;
     private AppointmentHistory appointmentHistory;
-    private VitalSignsHistory vitalSignsHistory;
     private PatientDirectory patientDirectory;
     private String userName;
     private Patient patient;
 
-    public DoctorJPanel(JPanel userProcessContainer, PersonDirectory 
-            personDirectory, VitalSignsHistory vitalSignsHistory, 
-            String userName, Patient patient, PatientDirectory
-                            patientDirectory) {
-        initComponents();
-        this.personDirectory = personDirectory;
-        this.vitalSignsHistory = vitalSignsHistory;
-        this.userName = userName;
-        this.patient = patient;
-        this.patientDirectory = patientDirectory;
-    }
+    
 
     public DoctorJPanel(JPanel userProcessContainer,
             PersonDirectory personDirectory,
-            AppointmentHistory appointmentHistory, VitalSignsHistory 
-                    vitalSignsHistor, Patient patient, PatientDirectory
+            AppointmentHistory appointmentHistory, 
+            Patient patient, PatientDirectory
                             patientDirectory) {
         initComponents();
         this.personDirectory = personDirectory;
         this.appointmentHistory = appointmentHistory;
-        this.vitalSignsHistory = vitalSignsHistor;
         this.patientDirectory = patientDirectory;
         this.patient = patient;
         loadLoginPanel();
@@ -55,13 +42,23 @@ public class DoctorJPanel extends javax.swing.JPanel {
     private void loadLoginPanel() {
         LoginDoctorJPanel loginDoctorJPanel
                 = new LoginDoctorJPanel(viewOperationsTask, 
-                        personDirectory, vitalSignsHistory, patientDirectory, 
+                        personDirectory, patientDirectory, 
                         patient);
         viewOperationsTask.add("loginDoctorJPanel", loginDoctorJPanel);
         CardLayout layout = (CardLayout) viewOperationsTask.getLayout();
         layout.next(viewOperationsTask);
     }
 
+    public DoctorJPanel(JPanel userProcessContainer, PersonDirectory 
+            personDirectory,
+            String userName, Patient patient, PatientDirectory
+                            patientDirectory) {
+        initComponents();
+        this.personDirectory = personDirectory;
+        this.userName = userName;
+        this.patient = patient;
+        this.patientDirectory = patientDirectory;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -133,11 +130,10 @@ public class DoctorJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         //CreateVItalSignsJPanel vitalSignCreate=new CreateVItalSignsJPanel(patientDirectory);
         //splitPane.setRightComponent(vitalSignCreate);
-        
         CreateVItalSignsJPanel vitalSignCreate
                 = new CreateVItalSignsJPanel(viewOperationsTask,
-                        patientDirectory);
-        viewOperationsTask.add("bookAppointment", vitalSignCreate);
+                        patientDirectory, patient);
+        viewOperationsTask.add("vitalSignCreate", vitalSignCreate);
         CardLayout layout = (CardLayout) viewOperationsTask.getLayout();
         layout.next(viewOperationsTask);
     }//GEN-LAST:event_recordObservationButtonActionPerformed

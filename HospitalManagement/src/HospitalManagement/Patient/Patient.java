@@ -27,6 +27,7 @@ public class Patient extends Person {
     private AppointmentHistory appointmentHistory;
     private PersonDirectory personDirectory;
     private ArrayList<Person> person;
+    private PatientDirectory patientDirectory;
     
 
 
@@ -35,9 +36,10 @@ public class Patient extends Person {
             String email, String userType, String userName, String password) {
         super(id, name, age, gender, phoneNumber, email, userType,
                 userName, password);
+        vitalSignHistory = new VitalSignsHistory();
         appointmentHistory = new AppointmentHistory();
         address = new Address();
-        vitalSignHistory = new VitalSignsHistory();
+        this.patientDirectory = new PatientDirectory();
     }
 
     public Patient() {

@@ -20,7 +20,7 @@ public class Hospital {
     DoctorDirectory doctorDirectory;
     public Hospital()
     {
-      community=new Community();
+      //community=new Community();
       doctorDirectory=new DoctorDirectory();
     }
 

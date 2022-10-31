@@ -32,13 +32,13 @@ public class LoginDoctorJPanel extends javax.swing.JPanel {
      * Creates new form LoginDoctorJPanel
      */
     public LoginDoctorJPanel(JPanel userProcessContainer,
-            PersonDirectory personDirectory, VitalSignsHistory vitalSignsHistory,
+            PersonDirectory personDirectory,
             PatientDirectory patientDirectory,
             Patient patient) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.personDirectory = personDirectory;
-        this.vitalSignsHistory = vitalSignsHistory;
+       
         this.patientDirectory = patientDirectory;
         this.patient = patient;
     }
@@ -148,7 +148,7 @@ public class LoginDoctorJPanel extends javax.swing.JPanel {
                     JOptionPane.INFORMATION_MESSAGE);
             DoctorJPanel doctorJPanel
                     = new DoctorJPanel(userProcessContainer, personDirectory,
-                            vitalSignsHistory, userName, patient, patientDirectory);
+                             userName, patient, patientDirectory);
             userProcessContainer.add("patientJPanel", doctorJPanel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);

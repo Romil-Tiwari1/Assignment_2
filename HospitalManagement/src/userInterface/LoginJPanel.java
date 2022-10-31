@@ -6,6 +6,8 @@ package userInterface;
 
 import HospitalManagement.Appointment.Appointment;
 import HospitalManagement.Appointment.AppointmentHistory;
+import HospitalManagement.Patient.Patient;
+import HospitalManagement.Patient.PatientDirectory;
 import HospitalManagement.Person.PersonDirectory;
 import HospitalManagement.VitalSigns.VitalSignsHistory;
 import java.awt.CardLayout;
@@ -24,20 +26,24 @@ public class LoginJPanel extends javax.swing.JPanel {
     private PersonDirectory personDirectory;
     private AppointmentHistory appointmentHistory;
     private Appointment appointment;
-    private VitalSignsHistory vitalSigns;
+    private PatientDirectory patientDirectory;
+    private Patient patient;
 
     /**
      * Creates new form LoginJPanel
      */
     public LoginJPanel(JPanel userProcessContainer,
-            PersonDirectory personDirectory, AppointmentHistory appointmentHistory, Appointment appointment,
-            VitalSignsHistory vitalSigns) {
+            PersonDirectory personDirectory, AppointmentHistory appointmentHistory, 
+            Appointment appointment,
+            PatientDirectory patientDirectory,
+            Patient patient) {
+        this.patient = patient;
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.personDirectory = personDirectory;
         this.appointmentHistory = appointmentHistory;
         this.appointment = appointment;
-        this.vitalSigns = vitalSigns;
+        this.patientDirectory = patientDirectory;
     }
 
     /**
@@ -137,8 +143,7 @@ public class LoginJPanel extends javax.swing.JPanel {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         userName = userNameJInput.getText();
         userPassword = new String (userPasswordJInput.getPassword());;
-        System.out.println(userPassword);
-
+        
         if (userName.toLowerCase().equals("patient") && 
                 userPassword.toLowerCase().equals("patient")) {
             JOptionPane.showMessageDialog(this,
@@ -149,7 +154,7 @@ public class LoginJPanel extends javax.swing.JPanel {
             PatientJPanel patientJPanel
                     = new PatientJPanel(userProcessContainer, personDirectory,
                             appointmentHistory, userName, appointment, 
-                            vitalSigns);
+                             patientDirectory, patient);
             userProcessContainer.add("patientJPanel", patientJPanel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);

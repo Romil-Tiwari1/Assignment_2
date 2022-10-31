@@ -4,6 +4,7 @@
  */
 package userInterface;
 
+import HospitalManagement.Community.CommunityDirectory;
 import HospitalManagement.Patient.PatientDirectory;
 import HospitalManagement.Person.PersonDirectory;
 import java.awt.CardLayout;
@@ -20,6 +21,7 @@ public class LoginAdminJPanel extends javax.swing.JPanel {
     String admin;
     private PersonDirectory personDirectory;
     private PatientDirectory patientDirectory;
+    private CommunityDirectory communityDirectory;
 
     /**
      * Creates new form LoginAdminJPanel
@@ -29,11 +31,13 @@ public class LoginAdminJPanel extends javax.swing.JPanel {
     }
 
     public LoginAdminJPanel(JPanel jPanel1,
-            PersonDirectory personDirectory, PatientDirectory patientDirectory) {
+            PersonDirectory personDirectory, PatientDirectory patientDirectory,
+            CommunityDirectory communityDirectory) {
         initComponents();
         this.userProcessContainer = jPanel1;
         this.patientDirectory = patientDirectory;
         this.personDirectory = personDirectory;
+        this.communityDirectory = communityDirectory;
     }
 
     /**
@@ -166,7 +170,8 @@ public class LoginAdminJPanel extends javax.swing.JPanel {
             admin = "System";
             AdminJPanel systemAdmin
                     = new AdminJPanel(userProcessContainer,
-                            personDirectory, patientDirectory, admin);
+                            personDirectory, patientDirectory, admin , 
+                            communityDirectory);
             userProcessContainer.add("systemAdmin", systemAdmin);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -180,7 +185,8 @@ public class LoginAdminJPanel extends javax.swing.JPanel {
             admin = "Community";
             AdminJPanel systemAdmin
                     = new AdminJPanel(userProcessContainer,
-                            personDirectory, patientDirectory, admin);
+                            personDirectory, patientDirectory, admin 
+                    ,communityDirectory);
             userProcessContainer.add("systemAdmin", systemAdmin);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
