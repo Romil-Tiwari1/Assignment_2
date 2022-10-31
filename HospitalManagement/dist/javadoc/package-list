@@ -1,0 +1,11 @@
+HospitalManagement.Address
+HospitalManagement.Admins
+HospitalManagement.Appointment
+HospitalManagement.Community
+HospitalManagement.Doctor
+HospitalManagement.Encounter
+HospitalManagement.Hospital
+HospitalManagement.Patient
+HospitalManagement.Person
+HospitalManagement.VitalSigns
+userInterface
